@@ -1,42 +1,28 @@
-import {
-    Toolbar,
-    Typography,
-    AppBar, Button
-  } from '@mui/material';
-  import { styled } from '@mui/material/styles';
+import { Toolbar, Typography, AppBar, Button, Avatar } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import quizLogo from '../icons/quiz_logo.svg';
 
+const HeaderBar = styled(Toolbar)({
+  backgroundColor: 'white',
+  justifyContent: 'flex-end',
+});
+const HeaderButton = styled(Button)({
+  marginRight: '20px',
+  fontSize: '13px',
+});
 
-  
-  const HeaderBar = styled(Toolbar)({
-    backgroundColor: 'white',
-    justifyContent: 'space-between',
-  });
-  
-  
-  const HeaderLink = styled(Typography)({
-    color: 'black',
-    fontWeight: 'lighter',
-    fontSize: '19px',
-    paddingBottom: '1px',
-    margin: 0,
-    marginRight: '20px',
-  });
-  const HeaderButton = styled(Button)({
+function Header() {
+  return (
+    <>
+      <AppBar position='static' sx={{ mb: '20px' }}>
+        <HeaderBar>
+          <HeaderButton variant='contained'>Новый квиз</HeaderButton>
+          <HeaderButton variant='contained'>Выйти</HeaderButton>
+          <Avatar alt='avatar' src='' sx={{ cursor: 'pointer' }} />
+        </HeaderBar>
+      </AppBar>
+    </>
+  );
+}
 
-  })
-  
-  function Header() {
-    return (
-      <>
-        <AppBar position='static' sx={{ mb: '20px' }}>
-          <HeaderBar>
-            <HeaderLink>Внести заказ</HeaderLink>
-            <HeaderButton variant='contained'>sign up</HeaderButton>
-            <HeaderButton variant='contained'>log in</HeaderButton>
-          </HeaderBar>
-        </AppBar>
-      </>
-    );
-  }
-  
-  export default Header;
+export default Header;

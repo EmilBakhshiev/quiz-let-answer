@@ -1,24 +1,24 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { Box, Button, Container, TextField, Typography } from '@mui/material';
+import { Box, Button, Container, Typography } from '@mui/material';
 import { AuthInput } from './AuthInput';
 import { SIGN_UP_TITLE } from '../utils/constants';
-import Raleway from '../vendor/fonts/Raleway-VariableFont_wght.ttf'
+
 
 function Auth({ onSubmit, title }) {
   return (
     <Container
       maxWidth='sm'
       sx={{
-        paddingTop: 30,
-        paddingBottom: 30,
+        paddingTop: 25,
+        paddingBottom: 25,
       }}
     >
       <Container
         sx={{
           background: 'white',
           paddingTop: 2,
-          paddingBottom: 5,
+          paddingBottom: 4,
           borderRadius: '6px',
           boxShadow:
             ' 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%)',
@@ -32,7 +32,7 @@ function Auth({ onSubmit, title }) {
               textAlign: 'center',
               fontWeight: 'bold',
               margin: '20px',
-              fontSize: '20px',
+              fontSize: '22px',
               fontFamily: 'Raleway',
               letterSpacing: 3,
             }}
@@ -47,19 +47,20 @@ function Auth({ onSubmit, title }) {
           ) : null}
           <Button
             variant='contained'
-            sx={{ width: '100%', padding: '10px', marginTop: '30px' }}
+            sx={{ width: '100%', padding: '10px', marginTop: '30px', letterSpacing: 1, fontWeight: 'bold' }}
           >
             Зарегистрироваться
           </Button>
           {title === SIGN_UP_TITLE ? (
-            <Typography component='p' sx={{marginTop: '20px', textAlign: 'center', fontFamily: 'Raleway'}}>
+            <Typography component='p' sx={{marginTop: '20px', textAlign: 'center'}}>
               Вы уже зарегистрировались? {' '}
-              <Link to='/sign-in'>Войти</Link>
+              <Link className='link' to='/sign-in'>Войти</Link>
             </Typography>
           ) : null}
         </Box>
       </Container>
     </Container>
+   
   );
 }
 
