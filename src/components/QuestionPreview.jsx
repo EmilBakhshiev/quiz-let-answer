@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container, Typography, TextField, Box } from '@mui/material';
 
 const QuestionPreview = (data) => {
   const {
@@ -20,18 +21,18 @@ const QuestionPreview = (data) => {
   };
 
   return (
-    <div className='bg-light rounded p-1'>
-      <div className='text-left' style={{ fontSize: '2rem' }}>
+    <Box sx={{maxWidth: '97%'}}>
+      <Typography style={{ fontSize: '2rem' }}>
       Вопрос № {index + 1}  
-      </div>
+      </Typography>
       <h3 className={textClass('question')}>
-        {question === '' ? 'missing question' : question}
+        {question === '' ? 'Пропущен вопрос' : question}
       </h3>
       <div className='d-flex w-100'>
         {img_src ? (
           <div className='w-50 mb-3 mr-3'>
             {' '}
-            <img className='img-fluid' src={img_src} alt='fluid' />{' '}
+            <img className='img-fluid' src={img_src} alt='изображение' style={{maxWidth: '100%'}} />{' '}
           </div>
         ) : null}
         <ul className={'list-group' + (img_src ? ' w-50' : ' w-100')}>
@@ -42,7 +43,7 @@ const QuestionPreview = (data) => {
               'list-group-item list-group-item-action'
             }
           >
-            {correct_answer === '' ? 'missing correct answer' : correct_answer}
+            {correct_answer === '' ? 'Пропущен правильный ответ' : correct_answer}
           </li>
           <li
             className={
@@ -51,7 +52,7 @@ const QuestionPreview = (data) => {
               'list-group-item list-group-item-action'
             }
           >
-            {other_answers1 === '' ? 'missing other answers1' : other_answers1}
+            {other_answers1 === '' ? 'Пропущен ответ 1' : other_answers1}
           </li>
           <li
             className={
@@ -60,7 +61,7 @@ const QuestionPreview = (data) => {
               'list-group-item list-group-item-action'
             }
           >
-            {other_answers2 === '' ? 'missing other answers2' : other_answers2}
+            {other_answers2 === '' ? 'Пропущен ответ 2' : other_answers2}
           </li>
           <li
             className={
@@ -69,11 +70,11 @@ const QuestionPreview = (data) => {
               'list-group-item list-group-item-action'
             }
           >
-            {other_answers3 === '' ? 'missing other answers3' : other_answers3}
+            {other_answers3 === '' ? 'Пропущен ответ 3' : other_answers3}
           </li>
         </ul>
       </div>
-    </div>
+    </Box>
   );
 };
 

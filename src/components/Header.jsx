@@ -1,6 +1,8 @@
 import { Toolbar, Typography, AppBar, Button, Avatar } from '@mui/material';
 import { styled } from '@mui/material/styles';
+
 import quizLogo from '../icons/quiz_logo.svg';
+import { useNavigate } from "react-router-dom";
 
 const HeaderBar = styled(Toolbar)({
   backgroundColor: 'white',
@@ -12,11 +14,12 @@ const HeaderButton = styled(Button)({
 });
 
 function Header() {
+  let navigate = useNavigate();
   return (
     <>
       <AppBar position='static' sx={{ mb: '20px' }}>
         <HeaderBar>
-          <HeaderButton variant='contained'>Новый квиз</HeaderButton>
+          <HeaderButton variant='contained' onClick={() => navigate('/')}>Новый квиз</HeaderButton>
           <HeaderButton variant='contained'>Выйти</HeaderButton>
           <Avatar alt='avatar' src='' sx={{ cursor: 'pointer' }} />
         </HeaderBar>

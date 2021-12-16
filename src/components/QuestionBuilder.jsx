@@ -1,13 +1,13 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   addQuestion,
   updateQuestion,
   deleteQuestion,
-} from "../actions/QuizActions";
-import QuestionPreview from "./QuestionPreview";
-import { connect } from "react-redux";
-import TextField from '@mui/material/TextField';
-import { Container } from "@mui/material";
+} from '../actions/QuizActions';
+import QuestionPreview from './QuestionPreview';
+import { connect } from 'react-redux';
+import { CustomMuiButton } from './QuizForm';
+import { Container, Typography, TextField, Box } from '@mui/material';
 
 class QuestionBuilder extends Component {
   state = {
@@ -48,15 +48,15 @@ class QuestionBuilder extends Component {
   requiredFieldsEmpty() {
     if (
       this.state.question === undefined ||
-      this.state.question === "" ||
+      this.state.question === '' ||
       this.state.correct_answer === undefined ||
-      this.state.correct_answer === "" ||
+      this.state.correct_answer === '' ||
       this.state.other_answers1 === undefined ||
-      this.state.other_answers1 === "" ||
+      this.state.other_answers1 === '' ||
       this.state.other_answers2 === undefined ||
-      this.state.other_answers2 === "" ||
+      this.state.other_answers2 === '' ||
       this.state.other_answers3 === undefined ||
-      this.state.other_answers3 === ""
+      this.state.other_answers3 === ''
     ) {
       return true;
     } else {
@@ -77,125 +77,78 @@ class QuestionBuilder extends Component {
 
   render() {
     return (
-      <div className="form-group list-group-item bg-secondary my-2">
-        <div className="input-group input-group-sm mb-3">
-          <div className="input-group-prepend">
-            <span
-              className="input-group-text bg-info text-white"
-              style={{
-                width: "120px",
-              }}
-            >
-              Вопрос:
-            </span>
-          </div>
+      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <TextField
+          fullWidth
+          type='text'
+          name='question'
+          value={this.state.question || ''}
+          onChange={this.handleChange}
+          label='Вопрос'
+          sx={{ marginBottom: '30px' }}
+        />
+        <TextField
+          type='text'
+          sx={{ marginBottom: '10px' }}
+          name='img_src'
+          onChange={this.handleChange}
+          value={this.state.img_src || ''}
+          label='Изображение (Необязательно)'
+        />
+        <TextField
+          type='text'
+          name='correct_answer'
+          onChange={this.handleChange}
+          value={this.state.correct_answer || ''}
+          label='Правильный ответ'
+          sx={{ marginBottom: '20px' }}
+          color='success'
+        />
+        <Box sx={{ display: 'flex'}}>
           <TextField
-            className="form-control"
-            type="text"
-            name="question"
-            value={this.state.question || ""}
+            type='text'
+            name='other_answers1'
             onChange={this.handleChange}
-            label="Вопрос"
+            value={this.state.other_answers1 || ''}
+            label='Вариант ответа 1'
+            sx={{ marginRight: '15px' }}
           />
-        </div>
-
-        <div className="input-group input-group-sm mb-3">
-          <div className="input-group-prepend">
-            <span
-              className="input-group-text bg-info text-white"
-              style={{
-                width: "120px",
-              }}
-            >
-              Ссылка на картинку:
-            </span>
-          </div>
-          <input
-            className="form-control"
-            type="text"
-            name="img_src"
+          <TextField
+            type='text'
+            name='other_answers2'
             onChange={this.handleChange}
-            value={this.state.img_src || ""}
-            placeholder="Image link (Optional)"
+            value={this.state.other_answers2 || ''}
+            label='Вариант ответа 2'
+            sx={{ marginRight: '15px' }}
           />
-        </div>
-
-        <div className="input-group input-group-sm mb-3">
-          <div className="input-group-prepend">
-            <span
-              className="input-group-text bg-info text-white"
-              style={{
-                width: "120px",
-              }}
-            >
-              Правильный ответ:
-            </span>
-          </div>
-          <input
-            className="form-control"
-            type="text"
-            name="correct_answer"
+          <TextField
+            type='text'
+            name='other_answers3'
             onChange={this.handleChange}
-            value={this.state.correct_answer || ""}
-            placeholder="Correct answer"
+            value={this.state.other_answers3 || ''}
+            label='Вариант ответа 3'
           />
-        </div>
-
-        <div className="input-group input-group-sm mb-3 ">
-          <div className="input-group-prepend">
-            <span
-              className="input-group-text bg-info text-white"
-              style={{
-                width: "120px",
-              }}
-            >
-              Другие ответы:
-            </span>
-          </div>
-          <input
-            className="mr-2 form-control"
-            type="text"
-            name="other_answers1"
-            onChange={this.handleChange}
-            value={this.state.other_answers1 || ""}
-            placeholder="Other answer 1"
-          />
-          <input
-            className="mr-2 form-control"
-            type="text"
-            name="other_answers2"
-            onChange={this.handleChange}
-            value={this.state.other_answers2 || ""}
-            placeholder="Other answer 2"
-          />
-          <input
-            className="mr-2 form-control"
-            type="text"
-            name="other_answers3"
-            onChange={this.handleChange}
-            value={this.state.other_answers3 || ""}
-            placeholder="Other answer 3"
-          />
-        </div>
-        <p className="text-left">
-          * <i>Ответы будут перемешаны автоматически</i>{" "}
-        </p>
+        </Box>
+        <Typography sx={{marginTop: '10px', marginBottom: '20px'}} component='span' >
+          * Ответы будут перемешаны автоматически
+        </Typography>
         <div>
           {this.state.error && (
-            <div className="alert alert-warning" role="alert">
+            <div className='alert alert-warning' role='alert'>
               {this.state.error}
             </div>
           )}
         </div>
         <QuestionPreview {...this.state} />
 
-        <button
-          className="btn btn-danger mt-3"
+        <CustomMuiButton
+          color='error'
+          variant='contained'
           onClick={() => this.props.deleteQuestion(this.props.id)}
         >
-          Remove Question
-        </button>
-      </div>
+          Удалить вопрос
+        </CustomMuiButton>
+      </Box>
     );
   }
 }

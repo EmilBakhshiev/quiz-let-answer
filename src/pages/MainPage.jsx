@@ -5,9 +5,9 @@ import QuizCard from '../components/QuizCard';
 import QuizForm from '../components/QuizForm';
 import Quiz from '../components/Quiz'
 
-function MainPage() {
+function MainPage(props) {
   return (
-      <QuizForm />
+      <QuizForm {...props}  navigate={props.navigate}/>
     /* <Container sx={{ padding: 5 }} maxWidth='xl'>
       <Grid container spacing={2}>
         <Grid item>

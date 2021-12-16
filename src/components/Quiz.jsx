@@ -25,20 +25,18 @@ class Quiz extends React.Component {
   }
 
   onSubmit() {
-    //check if all questions have been amswered
+    //проверка все ли вопросы отвечены
     let unanswered = this.props.questions.filter((q) => !q.userAnswer);
-
     if (unanswered.length === 0) {
-      //all questions answered
-      //show correct answers
+    // если неотвеченных нет
       this.props.showAnswers();
-      //set score
+      //количество очков
       this.setState({
         score: this.calculateScore(this.props.questions),
         submitted: true,
       });
     } else {
-      this.setErrorMessage('Please answer all questions');
+      this.setErrorMessage('Ответьте на все вопросы');
     }
   }
 
@@ -73,13 +71,13 @@ class Quiz extends React.Component {
             )}
             {this.state.submitted && (
               <div className='alert alert-success mt-3' role='alert'>
-                {`You scored  ${this.state.score} / ${this.props.questions.length} questions`}
+                {`Количество правильных ответов ${this.state.score} / ${this.props.questions.length} вопросов`}
               </div>
             )}
             <div className='d-flex'>
               <div>
                 <div className='input-group-prepend'>
-                  <span className='input-group-text'>Enter your name:</span>
+                  <span className='input-group-text'>Введите ваше имя</span>
                   <input className='form-control' type='text' />
                 </div>
               </div>
@@ -88,7 +86,7 @@ class Quiz extends React.Component {
                 onClick={() => this.onSubmit()}
                 className='btn btn-success mx-auto p-3 m-3 w-25'
               >
-                Submit
+                Отправить
               </button>
             </div>
           </div>

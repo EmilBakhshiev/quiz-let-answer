@@ -1,22 +1,33 @@
-import { Container } from "@mui/material";
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { addQuestion, submitQuiz } from "../actions/QuizActions";
-import QuestionBuilder from "./QuestionBuilder";
+import {
+  Container,
+  Paper,
+  TextField,
+  Typography,
+  Button,
+  Box,
+  Alert,
+  Fade,
+} from '@mui/material';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addQuestion, submitQuiz } from '../actions/QuizActions';
+import QuestionBuilder from './QuestionBuilder';
+import { styled } from '@mui/material/styles';
 
-var shuffle = require("knuth-shuffle").knuthShuffle;
+var shuffle = require('knuth-shuffle').knuthShuffle;
+
+export const CustomMuiButton = styled(Button)({
+  marginBottom: '20px',
+  width: '100%',
+  height: '50px',
+});
 
 class QuizForm extends Component {
   state = {
-    name: "",
+    name: '',
   };
 
-  componentDidMount() {
-    //initialize first question
-    // if (this.props.questions.length === 0) {
-    //   this.props.addQuestion();
-    // }
-  }
+  componentDidMount() {}
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -34,12 +45,17 @@ class QuizForm extends Component {
 
   onSubmit = async (e) => {
     e.preventDefault();
-    //check if all required fields for all questions are not empty
-    let incomplete = this.props.questions.filter(
+    //проверка все ли обязательные поля заполнены
+    let incompleteQuestion = this.props.questions.filter(
       (q) => q.requiredFieldsEmpty === true
     );
-    if (incomplete.length > 0) {
-      this.setErrorMessage("Заполните пустые поля");
+
+    if (
+      incompleteQuestion.length > 0 ||
+      this.state.name === '' ||
+      this.state.name === undefined
+    ) {
+      this.setErrorMessage('Заполните пустые поля');
     } else {
       let questions = this.props.questions.map((q) => {
         let randomOrderedAnswers = shuffle(
@@ -66,7 +82,7 @@ class QuizForm extends Component {
         name: this.state.name,
       };
       const id = await this.props.submitQuiz(quiz);
-      /* history.push(`/quiz/${id}`); */
+      this.props.navigate(`/quiz/${id}`);
     }
   };
   render() {
@@ -78,48 +94,81 @@ class QuizForm extends Component {
         ))
       : null;
     return (
-      <Container className="d-flex" sx={{backgroundColor: 'white'}}>
-        <div className="w-75 mx-2 container">
-          <h3>Cоздать викторину</h3>
-          <div className="input-group input-group-lg mb-3">
-            <div className="input-group-prepend">
-              <span className="input-group-text bg-info text-white">
-                Название квиза:
-              </span>
-            </div>
-            <input
-              className="form-control"
-              name="name"
-              value={this.state.name}
-              onChange={this.handleChange}
-              type="text"
-              placeholder="Name your quiz"
-            />
-          </div>
+      <Paper
+        sx={{
+          width: '50%',
+          margin: '0 auto',
+          padding: '20px',
+          boxSizing: 'border-box',
+          marginBottom: '30px',
+        }}
+      >
+        <Container
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Typography
+            component='h2'
+            sx={{
+              textAlign: 'center',
+              fontWeight: 'bold',
+              marginBottom: '20px',
+              fontSize: '22px',
+              letterSpacing: 3,
+            }}
+          >
+            Cоздать квиз
+          </Typography>
 
-          <div>{content}</div>
-          {this.state.error && (
-            <div className="alert alert-danger" role="alert">
-              {this.state.error}
-            </div>
-          )}
-          <div className="btn-group d-flex justify-content-center">
-            <button
-              className="btn btn-success btn-sm btn-block"
-              onClick={this.props.addQuestion}
-            >
-              {" "}
-              Add question{" "}
-            </button>
-          </div>
-          <input
-            className="btn btn-primary btn-block mt-3"
-            type="submit"
-            value="Create Quiz"
-            onClick={this.onSubmit}
+          <TextField
+            fullWidth
+            name='name'
+            value={this.state.name}
+            onChange={this.handleChange}
+            type='text'
+            label='Название квиза'
+            sx={{ marginBottom: '20px' }}
           />
-        </div>
-      </Container>
+          {/* Генератор квиза */}
+          <Box sx={{borderBottom: '1.5px solid rgb(228, 228, 228)', borderTop: '1.5px solid rgb(228, 228, 228)', paddingTop: '20px'}}>{content}</Box>
+          {this.state.error && (
+            <Fade in={this.state.error} timeout={{ enter: 1000, exit: 500 }}>
+              <Alert
+                severity='error'
+                sx={{
+                  mb: 2,
+                  position: 'fixed',
+                  bottom: 16,
+                  left: 16,
+                  zIndex: '10',
+                }}
+              >
+                {this.state.error}
+              </Alert>
+            </Fade>
+          )}
+
+          <CustomMuiButton
+            sx={{ marginTop: '20px' }}
+            variant='contained'
+            color='success'
+            onClick={this.props.addQuestion}
+          >
+            Добавить вопрос
+          </CustomMuiButton>
+
+          <CustomMuiButton
+            variant='contained'
+            type='submit'
+            onClick={this.onSubmit}
+          >
+            Создать квиз
+          </CustomMuiButton>
+        </Container>
+      </Paper>
     );
   }
 }
