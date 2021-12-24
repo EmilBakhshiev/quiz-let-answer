@@ -1,8 +1,6 @@
-import { Toolbar, Typography, AppBar, Button, Avatar } from '@mui/material';
+import { Toolbar, AppBar, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
-
-import quizLogo from '../icons/quiz_logo.svg';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const HeaderBar = styled(Toolbar)({
   backgroundColor: 'white',

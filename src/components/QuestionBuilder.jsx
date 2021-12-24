@@ -7,7 +7,7 @@ import {
 import QuestionPreview from './QuestionPreview';
 import { connect } from 'react-redux';
 import { CustomMuiButton } from './QuizForm';
-import { Container, Typography, TextField, Box } from '@mui/material';
+import { Typography, TextField, Box } from '@mui/material';
 
 class QuestionBuilder extends Component {
   state = {

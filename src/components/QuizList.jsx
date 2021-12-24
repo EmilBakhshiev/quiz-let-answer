@@ -5,14 +5,12 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardMedia,
   Typography,
   Button,
   Container,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-import testImage from '../images/3307.jpg';
 
 export class QuizList extends Component {
   componentDidMount() {

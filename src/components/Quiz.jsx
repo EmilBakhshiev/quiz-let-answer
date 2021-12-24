@@ -1,21 +1,18 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import {  setQuiz, showAnswers } from '../actions/answerQuizActions';
+import { setQuiz, showAnswers } from '../actions/answerQuizActions';
 import QuestionDisplay from './QuestionDisplay';
-import QuizList from './QuizList';
-import axios from 'axios';
-import {useParams} from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
-const withRouter = WrappedComponent => props => {
-    const params = useParams();
-    // etc... other react-router-dom v6 hooks
-    return (
-        <WrappedComponent
-            {...props}
-            params={params}
-            // etc...
-        />
-    );
+const withRouter = (WrappedComponent) => (props) => {
+  const params = useParams();
+  return (
+    <WrappedComponent
+      {...props}
+      params={params}
+
+    />
+  );
 };
 
 class Quiz extends React.Component {
@@ -42,7 +39,7 @@ class Quiz extends React.Component {
     //проверка все ли вопросы отвечены
     let unanswered = this.props.questions.filter((q) => !q.userAnswer);
     if (unanswered.length === 0) {
-    // если неотвеченных нет
+      // если неотвеченных нет
       this.props.showAnswers();
       //количество очков
       this.setState({
@@ -71,7 +68,6 @@ class Quiz extends React.Component {
     return (
       <Fragment>
         <div className='d-flex'>
-
           <div className='container'>
             <h1 className='text-center'>{this.props.name}</h1>
             {questions}
@@ -101,12 +97,13 @@ class Quiz extends React.Component {
     );
   }
 }
-let QuizWithRouter = withRouter(Quiz)
+let QuizWithRouter = withRouter(Quiz);
 const mapStateToProps = ({ answerQuiz: { name, questions, showAnswers } }) => ({
   name,
   questions,
   showAnswers,
 });
 
-export default connect(mapStateToProps, { setQuiz, showAnswers })(QuizWithRouter);
-
+export default connect(mapStateToProps, { setQuiz, showAnswers })(
+  QuizWithRouter
+);

@@ -1,9 +1,8 @@
-import { Container } from '@mui/material';
 import React from 'react';
 import { connect } from 'react-redux';
 import { updateAnswer } from '../actions/answerQuizActions';
 
-const QuestionDisplay = props => {
+const QuestionDisplay = (props) => {
   const {
     showCorrectAnswer,
     question,
@@ -11,25 +10,19 @@ const QuestionDisplay = props => {
     correct_answer,
     img_src,
     id: question_id,
-    userAnswer
+    userAnswer,
   } = props;
 
-  const answerClassNames = a => {
+  const answerClassNames = (a) => {
     if (showCorrectAnswer) {
-      //showCorrectAnswer ==true
-      //after quiz is submited
       if (a === correct_answer) {
-        //bg-success if correct answer
         return 'list-group-item list-group-item-action text-white bg-success';
       } else if (a === userAnswer && a !== correct_answer) {
-        //bg-danger if user selected answer is not correct
         return 'list-group-item list-group-item-action text-white bg-danger';
       } else {
-        //otherwise return normal style
         return 'list-group-item list-group-item-action';
       }
     } else {
-      //Before quiz is submited
       return (
         'list-group-item list-group-item-action' +
         (userAnswer === a ? ' text-white bg-secondary' : '')
@@ -37,7 +30,7 @@ const QuestionDisplay = props => {
     }
   };
 
-  const onClick = e => {
+  const onClick = (e) => {
     props.updateAnswer(e.target.innerHTML, question_id);
   };
 
@@ -56,7 +49,7 @@ const QuestionDisplay = props => {
         >
           {answers.map((a, i) => (
             <li
-              onClick={e => onClick(e, question_id)}
+              onClick={(e) => onClick(e, question_id)}
               key={i}
               className={answerClassNames(a)}
             >
@@ -69,7 +62,4 @@ const QuestionDisplay = props => {
   );
 };
 
-export default connect(
-  null,
-  { updateAnswer }
-)(QuestionDisplay);
+export default connect(null, { updateAnswer })(QuestionDisplay);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Typography, TextField, Box } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 
 const QuestionPreview = (data) => {
   const {
