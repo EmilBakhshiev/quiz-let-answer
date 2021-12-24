@@ -25,7 +25,7 @@ export const submitQuiz = (props) => async (dispatch) => {
     dispatch({ type: SUBMIT_QUIZ, payload: data });
   }
 
-  return data;
+  return data._id;
 };
 
 export const getAllQuizzes = () => async (dispatch) => {
