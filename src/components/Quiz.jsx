@@ -1,8 +1,22 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { setQuiz, showAnswers } from '../actions/answerQuizActions';
+import {  setQuiz, showAnswers } from '../actions/answerQuizActions';
 import QuestionDisplay from './QuestionDisplay';
 import QuizList from './QuizList';
+import axios from 'axios';
+import {useParams} from "react-router-dom";
+
+const withRouter = WrappedComponent => props => {
+    const params = useParams();
+    // etc... other react-router-dom v6 hooks
+    return (
+        <WrappedComponent
+            {...props}
+            params={params}
+            // etc...
+        />
+    );
+};
 
 class Quiz extends React.Component {
   state = {
@@ -10,7 +24,7 @@ class Quiz extends React.Component {
     submitted: false,
   };
   componentDidMount() {
-    this.props.setQuiz(this.props.id);
+    this.props.setQuiz(this.props.params.id);
   }
 
   setErrorMessage(message) {
@@ -57,9 +71,7 @@ class Quiz extends React.Component {
     return (
       <Fragment>
         <div className='d-flex'>
-          <div className='w-25 mx-2'>
-            
-          </div>
+
           <div className='container'>
             <h1 className='text-center'>{this.props.name}</h1>
             {questions}
@@ -75,12 +87,6 @@ class Quiz extends React.Component {
               </div>
             )}
             <div className='d-flex'>
-              <div>
-                <div className='input-group-prepend'>
-                  <span className='input-group-text'>Введите ваше имя</span>
-                  <input className='form-control' type='text' />
-                </div>
-              </div>
               <button
                 disabled={this.state.submitted}
                 onClick={() => this.onSubmit()}
@@ -95,11 +101,12 @@ class Quiz extends React.Component {
     );
   }
 }
-
+let QuizWithRouter = withRouter(Quiz)
 const mapStateToProps = ({ answerQuiz: { name, questions, showAnswers } }) => ({
   name,
   questions,
   showAnswers,
 });
 
-export default connect(mapStateToProps, { setQuiz, showAnswers })(Quiz);
+export default connect(mapStateToProps, { setQuiz, showAnswers })(QuizWithRouter);
+

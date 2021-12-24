@@ -82,7 +82,7 @@ class QuizForm extends Component {
         name: this.state.name,
       };
       const id = await this.props.submitQuiz(quiz);
-      this.props.navigate(`/quiz/${id}`);
+      this.props.navigate(`/`);
     }
   };
   render() {

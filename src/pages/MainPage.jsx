@@ -9,22 +9,7 @@ import QuizList from '../components/QuizList'
 function MainPage(props) {
   return (
       <QuizList {...props}  navigate={props.navigate}/>
-    /* <Container sx={{ padding: 5 }} maxWidth='xl'>
-      <Grid container spacing={2}>
-        <Grid item>
-          <QuizCard />
-        </Grid>
-        <Grid item>
-          <QuizCard />
-        </Grid>
-        <Grid item>
-          <QuizCard />
-        </Grid>
-        <Grid item>
-          <QuizCard />
-        </Grid>
-      </Grid>
-    </Container> */
+ 
   );
 }
 

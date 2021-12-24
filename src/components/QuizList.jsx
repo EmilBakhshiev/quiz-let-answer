@@ -8,11 +8,9 @@ import {
   CardMedia,
   Typography,
   Button,
-  Box,
   Container,
-  Paper,
-  Link,
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 import testImage from '../images/3307.jpg';
 
@@ -31,20 +29,19 @@ export class QuizList extends Component {
         >
           Квизы
         </Typography>
-        <Container sx={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+        <Container
+          sx={{
+            display: 'flex',
+            
+            flexWrap: 'wrap',
+          }}
+        >
           {someQuizzes &&
             someQuizzes.length > 0 &&
             someQuizzes.map((quiz) => {
               return (
-                <Card sx={{ width: 345}}>
-                  <CardMedia
-                    component='img'
-                    height='140'
-                    src={testImage}
-                    alt='test'
-                  />
+                <Card key={quiz._id} sx={{ width: 345, margin: '10px' }}>
                   <CardContent>
-                    {/* <a key={quiz._id} href={`quiz/${quiz._id}`}> */}
                     <Typography
                       gutterBottom
                       variant='h5'
@@ -53,15 +50,10 @@ export class QuizList extends Component {
                     >
                       {quiz.name}
                     </Typography>
-                    {/*  <Typography sx={{fontSize: '13px'}}>Автор квиза</Typography> */}
                   </CardContent>
                   <CardActions>
                     <Button size='small'>
-                      <Link
-                        sx={{ textDecoration: 'none' }}
-                        key={quiz._id}
-                        href={`/quiz/${quiz._id}`}
-                      >
+                      <Link style={{textDecoration: 'none'}} key={quiz._id} to={`/quiz/${quiz._id}`}>
                         Пройти
                       </Link>
                     </Button>

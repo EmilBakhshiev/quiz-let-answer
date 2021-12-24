@@ -24,6 +24,7 @@ export const submitQuiz = (props) => async (dispatch) => {
   if (data !== undefined) {
     dispatch({ type: SUBMIT_QUIZ, payload: data });
   }
+
   return data;
 };
 

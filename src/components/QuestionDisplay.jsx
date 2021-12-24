@@ -1,3 +1,4 @@
+import { Container } from '@mui/material';
 import React from 'react';
 import { connect } from 'react-redux';
 import { updateAnswer } from '../actions/answerQuizActions';
@@ -42,9 +43,6 @@ const QuestionDisplay = props => {
 
   return (
     <div>
-      {/* <span className='float-left text-secondary' style={{ fontSize: '2rem' }}>
-        {`#${index + 1} `}{' '}
-      </span> */}
       <h3 className='text-center'>{question}</h3>
       <div className='d-flex'>
         {img_src ? (
