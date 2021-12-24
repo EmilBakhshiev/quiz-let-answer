@@ -4,10 +4,11 @@ import QuestionBuilder from '../components/QuestionBuilder';
 import QuizCard from '../components/QuizCard';
 import QuizForm from '../components/QuizForm';
 import Quiz from '../components/Quiz'
+import QuizList from '../components/QuizList'
 
 function MainPage(props) {
   return (
-      <QuizForm {...props}  navigate={props.navigate}/>
+      <QuizList {...props}  navigate={props.navigate}/>
     /* <Container sx={{ padding: 5 }} maxWidth='xl'>
       <Grid container spacing={2}>
         <Grid item>

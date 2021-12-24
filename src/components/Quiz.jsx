@@ -10,7 +10,7 @@ class Quiz extends React.Component {
     submitted: false,
   };
   componentDidMount() {
-    this.props.setQuiz(this.props.match.params.id);
+    this.props.setQuiz(this.props.id);
   }
 
   setErrorMessage(message) {
@@ -58,7 +58,7 @@ class Quiz extends React.Component {
       <Fragment>
         <div className='d-flex'>
           <div className='w-25 mx-2'>
-            <QuizList />
+            
           </div>
           <div className='container'>
             <h1 className='text-center'>{this.props.name}</h1>

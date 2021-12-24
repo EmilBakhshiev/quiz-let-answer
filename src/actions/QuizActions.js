@@ -11,7 +11,7 @@ export const submitQuiz = (props) => async (dispatch) => {
   const quiz = {
     ...props,
   };
-  const res = await fetch("/quiz", {
+  const res = await fetch("http://localhost:3005/quiz", {
     method: "POST",
     body: JSON.stringify(quiz),
     headers: {
@@ -28,7 +28,7 @@ export const submitQuiz = (props) => async (dispatch) => {
 };
 
 export const getAllQuizzes = () => async (dispatch) => {
-  const res = await fetch("/allquizzes", {
+  const res = await fetch("http://localhost:3005/allquizzes", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
