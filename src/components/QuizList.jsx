@@ -31,11 +31,12 @@ export class QuizList extends Component {
           sx={{
             display: 'flex',
             flexWrap: 'wrap',
+            alignItems: 'flex-start',
           }}
         >
           {someQuizzes &&
             someQuizzes.length > 0 &&
-            someQuizzes.map((quiz, index) => {
+            someQuizzes.map((quiz) => {
               return (
                 <Card key={quiz._id} sx={{ width: 350, margin: '10px' }}>
                   <CardContent>
