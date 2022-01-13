@@ -7,6 +7,17 @@ const response = (res) => {
     return Promise.reject(`Error ${res.status}`);
 };
 
+export const getUser = (token) => {
+    return fetch(`${BASE_URL}/me`, {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+    }).then(response);
+};
+
 export const login = (email, password) => {
     return fetch(`${BASE_URL}/signin`, {
         method: "POST",
@@ -18,7 +29,7 @@ export const login = (email, password) => {
     }).then(response);
 };
 
-export const createProfile = ( email, password) => {
+export const createProfile = ( name, email, password) => {
     return fetch(`${BASE_URL}/signup`, {
         method: "POST",
         headers: {
@@ -26,6 +37,7 @@ export const createProfile = ( email, password) => {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
+            name,
             email,
             password,
         }),
