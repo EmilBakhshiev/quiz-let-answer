@@ -31,6 +31,7 @@ function SignUp({ navigate, setLoggedIn, setNameUser }) {
         }
       })
       .catch((err) => {
+        alert('Неверный логин или пароль');
         console.log(err);
       })
       .finally(() => {
